@@ -29,10 +29,19 @@ var quotes = [
 
 ];
 
-function generateQuote() {
-    var random = Math.floor(Math.random()*quotes.length);
+var lastRandomIndex = -1;
 
-    document.getElementById('qouteAndAuthor').innerHTML = `<p> ${quotes[random].quote}</p>
-    <p> ${quotes[random].author}
- </p>`
+function generateQuote() {
+    var random = Math.floor(Math.random() * quotes.length);
+
+    if (random === lastRandomIndex) {
+        random = (random + 1) % quotes.length;
+    }
+
+    lastRandomIndex = random;
+
+    document.getElementById('qouteAndAuthor').innerHTML = `
+        <p>${quotes[random].quote}</p>
+        <p>${quotes[random].author}</p>
+    `;
 }
